@@ -4,10 +4,10 @@ pipeline {
   tools {
       maven 'M2_HOME'
      }
-  environment {
-        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-    }
+  environment{
+			AWS_ACCESS_KEY_ID= '$(access_key)'
+			AWS_SECRET_KEY_ID= '$(secret_key)'
+		  }
   stages {
     stage('Checkout') {
        steps {
