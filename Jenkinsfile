@@ -36,7 +36,6 @@ pipeline {
                 sh 'sudo chmod 600 myEC2key.pem'
                 sh 'terraform init'
                 sh 'terraform validate'
-		sh 'terraform fmt'
                sh 'terraform apply --auto-approve'
                 }
             }
