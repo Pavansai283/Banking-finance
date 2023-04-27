@@ -11,5 +11,11 @@ pipeline {
 	 git 'https://github.com/Pavansai283/banking-finance.git'
 	 }
 	}
+  stage('building application') {
+       steps {
+         echo "Cleaning... Compiling... Testing... Packaging..."
+         sh 'mvn clean package'
+      }
+      }
 	}
 	}
