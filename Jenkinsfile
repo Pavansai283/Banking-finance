@@ -17,5 +17,10 @@ pipeline {
          sh 'mvn clean package'
       }
       }
+  stage('Docker image creating') {
+       steps {
+       sh 'docker build -t pavanputtur/bankapp:1.0 .'
+       }
+       }
 	}
 	}
