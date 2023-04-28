@@ -2,7 +2,7 @@ resource "aws_instance" "test-server" {
   ami           = "ami-02eb7a4783e7e9317" 
   instance_type = "t2.medium" 
   availability_zone = "ap-south-1a"
-  vpc_security_group_ids= ["sg-075da468752d2a222"]
+  vpc_security_group_ids= ["sg-0e3240a277ba0665b"]
   key_name = "mykey"
   
   connection {
