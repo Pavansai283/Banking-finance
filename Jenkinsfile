@@ -37,7 +37,7 @@ pipeline {
   stage ('Configure Test-server with Terraform & Deploying'){
             steps {
                 dir('my-serverfiles'){
-                sh 'sudo chmod 600 myEC2key.pem'
+                sh 'sudo chmod 600 mykey.pem'
                 sh 'terraform init'
                 sh 'terraform validate'
                 sh 'terraform apply --auto-approve'
