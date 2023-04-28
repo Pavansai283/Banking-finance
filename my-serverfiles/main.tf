@@ -3,12 +3,12 @@ resource "aws_instance" "test-server" {
   instance_type = "t2.medium" 
   availability_zone = "ap-south-1a"
   vpc_security_group_ids= ["sg-075da468752d2a222"]
-  key_name = "myEC2key"
+  key_name = "mykey"
   
   connection {
     type     = "ssh"
     user     = "ubuntu"
-    private_key = file("myEC2key.pem")
+    private_key = file("mykey.pem")
     host     = self.public_ip
   }  
   provisioner "remote-exec" {
