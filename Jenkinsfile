@@ -44,6 +44,11 @@ pipeline {
                 //}
             //}
         //}
+  stage('Deploy using Ansible') {
+         steps {
+	   ansiblePlaybook credentialsId: 'prod-server', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml'
+	   }
+	   }
   stage ('Deploy using k8s'){
          steps {
            sshagent(['k8s']) {
