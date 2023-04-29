@@ -11,10 +11,14 @@ resource "aws_instance" "test-server" {
       user        = "ubuntu"
       private_key = file("mykey.pem")
     }
+  provisioner "remote-exec" {
+        inline = [ "echo 'wait to start instance' "]
+    }
 
   tags = {
     Name = "test-server"
     }
+
   provisioner "remote-exec" {
      inline = [
       "sudo apt update -y",
