@@ -4,12 +4,18 @@ resource "aws_instance" "test-server" {
   availability_zone = "ap-south-1a"
   vpc_security_group_ids= ["sg-0e3240a277ba0665b"]
   key_name = "mykey"
+
+  connection {
+      type        = "ssh"
+      host        = self.public_ip
+      user        = "ubuntu"
+      private_key = file("mykey.pem")
+    }
+
   tags = {
     Name = "test-server"
+    }
   }
- // provisioner "local-exec" {
-       // command = " echo ${aws_instance.test-server.public_ip} > inventory "
-  //}
   provisioner "remote-exec" {
      inline = [
       "sudo apt update -y",
@@ -22,12 +28,4 @@ resource "aws_instance" "test-server" {
       "sudo cp kubectl /usr/local/bin/kubectl",
       "sudo usermod -aG docker ubuntu"
        ]
-     connection {
-      type        = "ssh"
-      host        = self.public_ip
-      user        = "ubuntu"
-      private_key = file("./mykey.pem")
-    }
   }
-}
-}
