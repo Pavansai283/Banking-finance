@@ -16,7 +16,7 @@ pipeline {
 	 }
 	}
   stage('building application') {
-       steps {
+       steAAps {
          echo "Cleaning... Compiling... Testing... Packaging..."
          sh 'mvn clean package'
       }
@@ -34,15 +34,30 @@ pipeline {
        }
        }
        }
-  stage ('Configure Test-server with Terraform & Deploying'){
-            steps {
-                dir('my-serverfiles'){
-                sh 'sudo chmod 600 mykey.pem'
-                sh 'terraform init'
-                sh 'terraform validate'
-                sh 'terraform apply --auto-approve'
-                }
-            }
-        }
-	}
-	}
+  //stage ('Configure Test-server with Terraform & Deploying'){
+    //        steps {
+      //          dir('my-serverfiles'){
+        //        sh 'sudo chmod 600 mykey.pem'
+          //      sh 'terraform init'
+            //    sh 'terraform validate'
+              //  sh 'terraform apply --auto-approve'
+                //}
+            //}
+        //}
+  stage ('Deploy using k8s'){
+         steps {
+           sshagent(['k8s']) {
+           sh "scp -o StrictHostKeyChecking=no Deployment-service.yml ubuntu@43.205.253.206/home/ubuntu"
+	   script {
+	       try {
+	           sh "ssh ubuntu@43.205.253.206 kubectl apply -f ."
+		   }catch(error){
+		   sh "ssh ubuntu@43.205.253.206 kubectl create -f ."
+
+		   }
+		   }
+		   }
+                 }
+	      }
+	   }
+	   }
