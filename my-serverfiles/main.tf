@@ -3,7 +3,7 @@ resource "aws_instance" "test-server" {
   instance_type = "t2.medium" 
   availability_zone = "ap-south-1a"
   vpc_security_group_ids= ["sg-0e3240a277ba0665b"]
-  key_name = "mykey"
+  key_name = "mykey.pem"
 
   connection {
       type        = "ssh"
@@ -15,7 +15,6 @@ resource "aws_instance" "test-server" {
   tags = {
     Name = "test-server"
     }
-  }
   provisioner "remote-exec" {
      inline = [
       "sudo apt update -y",
@@ -28,4 +27,5 @@ resource "aws_instance" "test-server" {
       "sudo cp kubectl /usr/local/bin/kubectl",
       "sudo usermod -aG docker ubuntu"
        ]
+  }
   }
