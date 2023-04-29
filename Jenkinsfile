@@ -44,25 +44,17 @@ pipeline {
                 //}
             //}
         //}
-  stage('Deploy using Ansible') {
-         steps {
-	   ansiblePlaybook credentialsId: 'prod-server', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml'
-	   }
-	   }
+//  stage('Deploy using Ansible') {
+  //       steps {
+//	   ansiblePlaybook credentialsId: 'prod-server', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml'
+//	   }
+//	   }
   stage ('Deploy using k8s'){
          steps {
-           sshagent(['k8s']) {
-           sh "scp -o StrictHostKeyChecking=no Deployment-service.yml ubuntu@43.205.253.206/home/ubuntu"
-	   script {
-	       try {
-	           sh "ssh ubuntu@43.205.253.206 kubectl apply -f ."
-		   }catch(error){
-		   sh "ssh ubuntu@43.205.253.206 kubectl create -f ."
-
-		   }
-		   }
-		   }
-                 }
-	      }
+           script{
+	      kubernetesDeploy (configs: 'Deployment-service.yml', kubeconfigId: 'k8spwd')
+	   }
+	   }
+	   }
 	   }
 	   }
