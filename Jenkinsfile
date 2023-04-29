@@ -16,7 +16,7 @@ pipeline {
 	 }
 	}
   stage('building application') {
-       steAAps {
+       steps {
          echo "Cleaning... Compiling... Testing... Packaging..."
          sh 'mvn clean package'
       }
