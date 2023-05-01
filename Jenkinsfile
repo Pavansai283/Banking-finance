@@ -52,7 +52,7 @@ pipeline {
   stage('Deploy using K8s') {
       KubernetesDeploy(
                configs: 'Deployment-service.yml',
-	       kubeconfigId: 'k8spwd'
+	       kubeconfigId: 'k8spwd',
 	       enableConfigSubstitution: true
 	       )
 	       }
