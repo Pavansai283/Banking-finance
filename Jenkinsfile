@@ -50,11 +50,11 @@ pipeline {
 //	   }
 //	   }
   stage('Deploy using K8s') {
-      steps {
-        script {
-          kubernetesDeploy(configs: "Deployment-service.yml", kubeconfigId: "k8s")
-        }
-      }
-    }  
+      KubernetesDeploy(
+               configs: 'Deployment-service.yml',
+	       kubeconfigId: 'k8s'
+	       enableConfigSubstitution: true
+	       )
+	       }
 	   }
 	   }
