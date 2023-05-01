@@ -51,12 +51,15 @@ pipeline {
 //	   }
   stage('Deploy using K8s') {
     steps{
-      kubernetesDeploy(
-               configs: 'Deployment-service.yml',
-	       kubeconfigId: 'k8spwd',
-	       enableConfigSubstitution: true
-	       )
-	       }
-	   }
+               "sudo apt upadte -y",
+               "sudo apt install docker.io -y",
+               "sudo snap install microk8s --clasic",
+               "sudo sleep 30",
+               "sudo microk8s status",
+               "sudo microk8s kubectl create deployment medicure-deploy --image=pavanputtur/bankapp:1.0",
+               "sudo microk8s kubectl expose deployment medicure-deploy --port=8084 --type=NodePort",
+               "sudo microk8s kubectl get svc",
+               "sudo echo public IP Address of the Instance",
+               "sudo curl http://checkip.amazonaws.com",
 	   }
 	   }
