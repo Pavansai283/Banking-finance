@@ -51,10 +51,19 @@ pipeline {
 //	   }
   stage ('Deploy using k8s'){
          steps {
-           script{
-	      kubernetesDeploy (configs: 'Deployment-service.yml', kubeconfigId: 'k8spwd')
-	   }
-	   }
-	   }
+           sshagent(['k8s']) {
+           sh "scp -o StrictHostKeyChecking=no Deployment-service.yml ubuntu@43.205.253.206/home/ubuntu"
+	   script {
+	       try {
+	           sh "ssh ubuntu@3.111.147.118 kubectl apply -f ."
+		   }catch(error){
+
+		   sh "ssh ubuntu@3.111.147.118 kubectl create -f ."
+
+		   }
+		   }
+		   }
+                 }
+	      }
 	   }
 	   }
