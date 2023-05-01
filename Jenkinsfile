@@ -52,7 +52,7 @@ pipeline {
   stage('Deploy using K8s') {
     steps{
                sh"sudo apt upadte -y",
-               sh"sudo apt install docker.io -y",
+               sh"sudo apt install docker.io",
                sh"sudo snap install microk8s --clasic",
                sh"sudo sleep 30",
                sh"sudo microk8s status",
