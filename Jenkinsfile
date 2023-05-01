@@ -50,11 +50,13 @@ pipeline {
 //	   }
 //	   }
   stage('Deploy using K8s') {
+    steps{
       KubernetesDeploy(
                configs: 'Deployment-service.yml',
 	       kubeconfigId: 'k8spwd',
 	       enableConfigSubstitution: true
 	       )
 	       }
+	   }
 	   }
 	   }
