@@ -51,15 +51,15 @@ pipeline {
 //	   }
   stage('Deploy using K8s') {
     steps{
-               "sudo apt upadte -y",
-               "sudo apt install docker.io -y",
-               "sudo snap install microk8s --clasic",
-               "sudo sleep 30",
-               "sudo microk8s status",
-               "sudo microk8s kubectl create deployment medicure-deploy --image=pavanputtur/bankapp:1.0",
-               "sudo microk8s kubectl expose deployment medicure-deploy --port=8084 --type=NodePort",
-               "sudo microk8s kubectl get svc",
-               "sudo echo public IP Address of the Instance",
-               "sudo curl http://checkip.amazonaws.com",
+               sh"sudo apt upadte -y",
+               sh"sudo apt install docker.io -y",
+               sh"sudo snap install microk8s --clasic",
+               sh"sudo sleep 30",
+               sh"sudo microk8s status",
+               sh"sudo microk8s kubectl create deployment medicure-deploy --image=pavanputtur/bankapp:1.0",
+               sh"sudo microk8s kubectl expose deployment medicure-deploy --port=8084 --type=NodePort",
+               sh"sudo microk8s kubectl get svc",
+               sh"sudo echo public IP Address of the Instance",
+               sh"sudo curl http://checkip.amazonaws.com",
 	   }
 	   }
